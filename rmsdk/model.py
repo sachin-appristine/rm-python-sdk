@@ -4,6 +4,7 @@ import json
 import requests
 from time import time
 from .utils import generateSignature, getNonce, orderDict
+from datetime import datetime
 
 class RMSDKModel(object):
     """The base RM SDK Model all other models will inherit.
@@ -108,7 +109,7 @@ class RMSDKModel(object):
 
     def getHeadersAndData(self, accessToken, requestUrl, method="post", data=None):
         nonceStr = getNonce()
-        timestamp = str(time())
+        timestamp = datetime.strftime(datetime.now(), "%s")
 
         if data is not None:
             data = json.dumps(orderDict(data), separators=(',', ':'))
